@@ -1,3 +1,14 @@
+textarea {
+  width: calc(100% - 20px); /* Adjust width as needed */
+  height: 500px; /* Set height to make it about twice as big */
+  font-size: 1.1em; /* Increase text size slightly */
+  color: black;
+  background-color: white; /* Set background color to white */
+  border: 1px solid #ccc; /* Add border for better visibility */
+  padding: 10px; /* Add padding for better spacing */
+  margin-bottom: 20px; /* Add margin for spacing between elements */
+}
+
 #root {
   max-width: 1280px;
   margin: 0 auto;

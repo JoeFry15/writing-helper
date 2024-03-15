@@ -19,17 +19,13 @@ const App: React.FC = () => {
     };
   }, [timerRunning]);
 
-  useEffect(() => {
-    if (timerRunning) {
-      fetchRandomWord();
-    }
-  }, [timerRunning]);
-
   const fetchRandomWord = async () => {
     try {
-      const response = await fetch('https://random-word-api.herokuapp.com/word');
-      const data = await response.json();
-      setRandomWord(data[0]);
+      const response = await fetch('popular.txt'); // Change the URL to your file name
+      const text = await response.text();
+      const words = text.split('\n');
+      const randomIndex = Math.floor(Math.random() * words.length);
+      setRandomWord(words[randomIndex]);
     } catch (error) {
       console.error('Error fetching random word:', error);
     }
@@ -42,16 +38,16 @@ const App: React.FC = () => {
   };
 
   const handleStartTimer = () => {
-    setTimerRunning(true);
+    setTimeRemaining(5 * 60); // Reset timer
+    setTimerRunning(true); // Start timer
+    fetchRandomWord(); // Fetch new random word
   };
 
   return (
     <>
       <h1>Writing Helper</h1>
       <div>
-        {!timerRunning && (
-          <button onClick={handleStartTimer}>Start Timer</button>
-        )}
+        <button onClick={handleStartTimer}>Start Timer</button>
         {randomWord && (
           <div>Random Word: {randomWord}</div>
         )}
